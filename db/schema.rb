@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20160123202919) do
   enable_extension "plpgsql"
 
   create_table "repositories", force: :cascade do |t|
+    t.integer "github_id"
     t.string  "name"
     t.string  "full_name"
     t.string  "description"

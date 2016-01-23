@@ -1,5 +1,16 @@
-<h1> Repositories, yo </h1>
+<h1> <%= @repositories.length%> Repositories, yo </h1>
 
-<% @repositories.each do |repo| %>
-  <%= repo.name %>
-<% end %>
+<table>
+  <th> Name </th>
+  <th> Full Name </th>
+  <th> Description </th>
+  <th> Fork? </th>
+  <% @repositories.each do |repo| %>
+    <tr>
+      <td><%= repo.name %></td>
+      <td><%= repo.full_name %></td>
+      <td><%= repo.description %></td>
+      <td><%= repo.fork %></td>
+    </tr>
+  <% end %>
+</table>
