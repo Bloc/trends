@@ -2,15 +2,31 @@
 
 <table>
   <th> Name </th>
-  <th> Full Name </th>
+  <th> Owner </th>
   <th> Description </th>
   <th> Fork? </th>
+  <th> Created </th>
+  <th> Watchers </th>
+  <th> Subscribers </th>
+  <th> Forks </th>
+  <th> Open Issues </th>
+  <th> Network </th>
+  <th> Language </th>
+  <th> Size <th>
   <% @repositories.each do |repo| %>
     <tr>
       <td><%= repo.name %></td>
-      <td><%= repo.full_name %></td>
+      <td><%= repo.owner %></td>
       <td><%= repo.description %></td>
       <td><%= repo.fork %></td>
+      <td><%= repo.created_at %></td>
+      <td><%= repo.watchers_count %></td>
+      <td><%= repo.subscribers_count %> </td>
+      <td><%= repo.forks %></td>
+      <td><%= repo.open_issues_count %></td>
+      <td><%= repo.network_count %></td>
+      <td><%= repo.language %></td>
+      <td><%= repo.size %><td>
     </tr>
   <% end %>
 </table>
