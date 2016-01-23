@@ -21,7 +21,7 @@ class GithubSync
   def self.update_repos!
     github = Github.new basic_auth: "choxi:a8abf7e501e9dcfa4e8bd2dd7759989bd3788504"
 
-    Repository.find_each do |repo|
+    Repository.where(fork: false).find_each do |repo|
       user, name = repo.full_name.split("/")
 
       github_repo =  github.repos.get(user: user, repo: name)
