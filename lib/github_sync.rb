@@ -6,6 +6,7 @@ class GithubSync
         repository = Repository.find_or_create_by(github_id: repo.id)
         repository.update_attributes({
           name: repo.name,
+          owner: repo.owner.login,
           full_name: repo.full_name,
           description: repo.description,
           html_url: repo.html_url,
