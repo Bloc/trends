@@ -1,0 +1,12 @@
+<h1> Repos by Year </h1>
+
+<table>
+  <th> Year </th>
+  <th> Repos </th>
+  <%- @repos_by_year.each do |row| %>
+    <tr>
+      <td> <%= row["date_trunc"] %> </td>
+      <td> <%= row["count"] %> </td>
+    </tr>
+  <% end %>
+</table>
