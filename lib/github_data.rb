@@ -1,6 +1,6 @@
-class GithubSync
+class GithubData
   def self.update_index!
-    github = Github.new basic_auth: "choxi:a8abf7e501e9dcfa4e8bd2dd7759989bd3788504"
+    github = Github.new basic_auth: ENV["OAUTH_TOKEN_1"]
     github.repos.list(:every).each_page do |page|
       page.each do |repo|
         repository = Repository.find_or_create_by(github_id: repo.id)
@@ -20,7 +20,7 @@ class GithubSync
   end
 
   def self.update_repos!
-    github = Github.new basic_auth: "choxi:a8abf7e501e9dcfa4e8bd2dd7759989bd3788504"
+    github = Github.new basic_auth: ENV["OAUTH_TOKEN_1"]
 
     Repository.where(fork: false).find_each do |repo|
       user, name = repo.full_name.split("/")
