@@ -7,6 +7,8 @@ class GithubData
   def self.update_index!
     if last_repository = Repository.order("created_at DESC").first
       options = { since: last_repository.github_id }
+    else
+      options = {}
     end
 
     github.repos.list(:every, options).each_page do |page|

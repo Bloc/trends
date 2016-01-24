@@ -1,6 +1,7 @@
 <h1> <%= @repositories.length%> Repositories, yo </h1>
 
 <table>
+  <th> Github ID </th>
   <th> Name </th>
   <th> Owner </th>
   <th> Description </th>
@@ -15,6 +16,7 @@
   <th> Size <th>
   <% @repositories.each do |repo| %>
     <tr>
+      <td><%= repo.github_id %></td>
       <td><%= repo.name %></td>
       <td><%= repo.owner %></td>
       <td><%= repo.description %></td>
