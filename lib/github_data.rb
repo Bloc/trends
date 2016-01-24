@@ -1,7 +1,15 @@
 class GithubData
+  def self.github
+    @github ||= Github.new basic_auth: ENV["OAUTH_TOKEN_1"]
+  end
+
+
   def self.update_index!
-    github = Github.new basic_auth: ENV["OAUTH_TOKEN_1"]
-    github.repos.list(:every).each_page do |page|
+    if last_repository = Repository.order("created_at DESC").first
+      options = { since: last_repository.github_id }
+    end
+
+    github.repos.list(:every, options).each_page do |page|
       page.each do |repo|
         repository = Repository.find_or_create_by(github_id: repo.id)
         repository.update_attributes({
@@ -14,8 +22,6 @@ class GithubData
           fork: repo.fork,
         })
       end
-
-      sleep 5
     end
   end
 
