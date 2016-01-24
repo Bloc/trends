@@ -1,5 +1,5 @@
 class RepositoriesController < ApplicationController
   def index
-    @repositories = Repository.all
+    @repositories = Repository.limit(10000).all
   end
 end
