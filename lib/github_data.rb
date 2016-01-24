@@ -4,7 +4,7 @@ class GithubData
   end
 
 
-  def self.update_index!
+  def self.refresh_index!
     if last_repository = Repository.order("created_at DESC").first
       options = { since: last_repository.github_id }
     else
