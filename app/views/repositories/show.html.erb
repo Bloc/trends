@@ -3,10 +3,35 @@
 <table>
   <th> Year </th>
   <th> Repos </th>
-  <%- @repos_by_year.each do |row| %>
+  <%- @repos_by_month.each do |row| %>
     <tr>
       <td> <%= row["date_trunc"] %> </td>
       <td> <%= row["count"] %> </td>
     </tr>
   <% end %>
 </table>
+
+<div id='chart'>
+</div>
+
+<script>
+  window.Trends = {};
+
+  $(function() {
+    var chart = new Highcharts.Chart({
+        colors: ["#7cb5ec", "#f7a35c"],
+        chart: {
+            type: 'column',
+            renderTo: 'chart'
+        },
+        xAxis: {
+          type: 'datetime',
+          categories: gon.years
+        },
+        series: [{
+          name: 'Repos',
+          data: gon.repos
+        }]
+    });
+  });
+</script>
