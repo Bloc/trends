@@ -1,6 +1,6 @@
 class RepositoriesController < ApplicationController
   def index
-    @repositories = Repository.limit(10_000).all
+    @repositories = Repository.order("created_at DESC").limit(1_000).all
   end
 
   def show
