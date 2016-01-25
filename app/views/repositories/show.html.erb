@@ -1,15 +1,4 @@
-<h1> Repos by Year </h1>
-
-<table>
-  <th> Year </th>
-  <th> Repos </th>
-  <%- @repos_by_month.each do |row| %>
-    <tr>
-      <td> <%= row["date_trunc"] %> </td>
-      <td> <%= row["count"] %> </td>
-    </tr>
-  <% end %>
-</table>
+<h1> Repos by Year <%= "- #{params[:language]}" if params[:language] %> </h1>
 
 <div id='chart'>
 </div>
@@ -23,6 +12,18 @@
         chart: {
             type: 'column',
             renderTo: 'chart'
+        },
+        title: {
+          style: {
+            display: 'none'
+          }
+        },
+        plotOptions: {
+          column: {
+            dataLabels: {
+              enabled: true
+            }
+          }
         },
         xAxis: {
           type: 'datetime',

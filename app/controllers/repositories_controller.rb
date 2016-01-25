@@ -6,9 +6,9 @@ class RepositoriesController < ApplicationController
   end
 
   def show
-    db = Repository.connection
-    @repos_by_month = db.execute("SELECT date_trunc('month', created_at), COUNT(*) FROM repositories WHERE last_synced_at IS NOT NULL GROUP BY 1 ORDER BY 1")
+    @repos_by_month = Repository.repos_by_month(language: params[:language])
     gon.years = @repos_by_month.map {|row| Time.parse(row["date_trunc"]).strftime("%b %Y") }
     gon.repos = @repos_by_month.map {|row| row["count"].to_i }
+    gon.language = params[:language]
   end
 end
