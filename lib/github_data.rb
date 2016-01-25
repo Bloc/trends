@@ -38,19 +38,23 @@ class GithubData
       Repository.not_fork.stale.find_each do |repo|
         user, name = repo.full_name.split("/")
 
-        github_repo =  github.repos.get(user: user, repo: name)
-        repo.update_attributes({
-          created_at: github_repo.created_at,
-          watchers_count: github_repo.watchers_count,
-          subscribers_count: github_repo.subscribers_count,
-          forks: github_repo.forks,
-          open_issues_count: github_repo.open_issues_count,
-          network_count: github_repo.network_count,
-          owner: github_repo.owner.login,
-          size: github_repo.size,
-          language: github_repo.language,
-          last_synced_at: Time.now
-        })
+        begin
+          github_repo =  github.repos.get(user: user, repo: name)
+          repo.update_attributes({
+            created_at: github_repo.created_at,
+            watchers_count: github_repo.watchers_count,
+            subscribers_count: github_repo.subscribers_count,
+            forks: github_repo.forks,
+            open_issues_count: github_repo.open_issues_count,
+            network_count: github_repo.network_count,
+            owner: github_repo.owner.login,
+            size: github_repo.size,
+            language: github_repo.language,
+            last_synced_at: Time.now
+          })
+        rescue Github::Error::Forbidden
+          # skip 403 permission errors
+        end
       end
     end
   end
