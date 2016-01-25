@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125051552) do
+ActiveRecord::Schema.define(version: 20160125053459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "github_tokens", force: :cascade do |t|
+    t.string   "username"
+    t.string   "token"
+    t.boolean  "claimed",    default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "repositories", force: :cascade do |t|
     t.integer  "github_id"
