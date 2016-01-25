@@ -3,7 +3,6 @@ class GithubData
     @github ||= Github.new basic_auth: ENV["OAUTH_TOKEN_1"]
   end
 
-
   def self.refresh_index!
     if last_repository = Repository.order("created_at DESC").first
       options = { since: last_repository.github_id }
@@ -28,9 +27,7 @@ class GithubData
   end
 
   def self.update_repos!
-    github = Github.new basic_auth: ENV["OAUTH_TOKEN_1"]
-
-    Repository.where(fork: false).find_each do |repo|
+    Repository.not_fork.stale.find_each do |repo|
       user, name = repo.full_name.split("/")
 
       github_repo =  github.repos.get(user: user, repo: name)
@@ -43,7 +40,8 @@ class GithubData
         network_count: github_repo.network_count,
         owner: github_repo.owner.login,
         size: github_repo.size,
-        language: github_repo.language
+        language: github_repo.language,
+        last_synced_at: Time.now
       })
     end
   end

@@ -1,5 +1,4 @@
 class Repository < ActiveRecord::Base
-  def self.count_by_year
-    self.connection.execute()
-  end
+  scope :stale,     -> { where("last_synced_at IS NULL OR last_synced_at < ?", 30.days.ago) }
+  scope :not_fork,  -> { where(fork: false) }
 end
