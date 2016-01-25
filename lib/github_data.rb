@@ -29,6 +29,8 @@ class GithubData
             fork: repo.fork,
           })
         end
+
+        sleep 1
       end
     end
   end
@@ -55,6 +57,8 @@ class GithubData
         rescue Github::Error::Forbidden
           # skip 403 permission errors
         end
+
+        sleep 1
       end
     end
   end
