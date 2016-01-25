@@ -33,7 +33,7 @@ class GithubData
     end
   end
 
-  def self.update_repos!
+  def self.refresh_repositories!
     self.connection do |github|
       Repository.not_fork.stale.find_each do |repo|
         user, name = repo.full_name.split("/")
