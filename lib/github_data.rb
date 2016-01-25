@@ -1,20 +1,10 @@
 class GithubData
   def self.connection(&block)
-    github_token = nil
+    github_token  = GithubToken.claim!
+    connection    = Github.new basic_auth: github_token.basic_auth_string
 
-    ActiveRecord::Base.transaction do
-      if github_token = GithubToken.unclaimed.first
-        github_token.claimed = true
-        github_token.save!
-      else
-        raise "No Github Tokens Available"
-      end
-    end
-
-    connection = Github.new basic_auth: github_token.basic_auth_string
     yield connection
   ensure
-    # make sure we release the token
     github_token.unclaim! if github_token
   end
 
