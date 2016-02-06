@@ -55,7 +55,8 @@ class GithubData
             last_synced_at: Time.now
           })
         rescue Github::Error::Forbidden, Github::Error::NotFound
-          # skip 403 permission errors
+          # skip 403 and 404 errors
+          puts "skipping #{repo.full_name}"
         end
 
         sleep 1
