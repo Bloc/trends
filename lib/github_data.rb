@@ -54,9 +54,9 @@ class GithubData
             language: github_repo.language,
             last_synced_at: Time.now
           })
-        rescue Github::Error::Forbidden, Github::Error::NotFound
-          # skip 403 and 404 errors
-          puts "skipping #{repo.full_name}"
+        rescue => e
+          puts "Skipping #{repo.full_name}: #{e.inspect}"
+          repo.update_attributes({last_synced_at: Time.now})
         end
 
         sleep 1
