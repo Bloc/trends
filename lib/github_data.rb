@@ -54,7 +54,7 @@ class GithubData
             language: github_repo.language,
             last_synced_at: Time.now
           })
-        rescue Github::Error::Forbidden
+        rescue Github::Error::Forbidden, Github::Error::NotFound
           # skip 403 permission errors
         end
 
