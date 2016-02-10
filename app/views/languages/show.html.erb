@@ -3,6 +3,14 @@
 <div id='chart'>
 </div>
 
+<h3> Most Popular Repos </h3>
+
+<ol>
+  <% @popular_repos.each do |repo| %>
+    <li><%= link_to repo.full_name, "https://github.com/#{repo.full_name}", target: "_blank" %></li>
+  <% end %>
+</ol>
+
 <script>
   $(function() {
     var chart = new Highcharts.Chart({
