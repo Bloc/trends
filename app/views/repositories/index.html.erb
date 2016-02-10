@@ -5,14 +5,6 @@
   <li> <b>Updated Repositories:</b> <%= @fresh_count %> </li>
 </ul>
 
-<div id="chart"></div>
-<h3> Charts </h3>
-<ul>
-  <li><a href="/repositories/1">Repos by Year Created </a></li>
-  <li><a href="/repositories/1?language=Ruby">Repos by Year Created (Ruby)</a></li>
-  <li><a href="/repositories/1?language=JavaScript">Repos by Year Created (JavaScript)</a></li>
-</ul>
-
 <h3> Recently Updated Repositories </h3>
 
 <table>
@@ -47,34 +39,3 @@
     </tr>
   <% end %>
 </table>
-
-<script>
-  window.Trends = {};
-
-  $(function() {
-    var chart = new Highcharts.Chart({
-        colors: ["#7cb5ec", "#f7a35c"],
-        chart: {
-            type: 'column',
-            renderTo: 'chart'
-        },
-        title: {
-          style: {
-            display: 'none'
-          }
-        },
-        plotOptions: {
-          column: {
-            dataLabels: {
-              enabled: true
-            }
-          }
-        },
-        xAxis: {
-          type: 'datetime',
-          categories: gon.years
-        },
-        series: gon.series
-    });
-  });
-</script>

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "repositories#index"
+  root "landing#homepage"
   resources :repositories, only: [:index, :show]
 
   # The priority is based upon order of creation: first created -> highest priority.
