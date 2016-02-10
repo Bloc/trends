@@ -1,11 +1,9 @@
-<h1> Repos by Year <%= "- #{params[:language]}" if params[:language] %> </h1>
+<h1> <%= params[:id] %> </h1>
 
 <div id='chart'>
 </div>
 
 <script>
-  window.Trends = {};
-
   $(function() {
     var chart = new Highcharts.Chart({
         colors: ["#7cb5ec", "#f7a35c"],

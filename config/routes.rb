@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root "landing#homepage"
-  resources :repositories, only: [:index, :show]
+  resources  :repositories, only: [:index, :show]
+  resources  :languages, only: :show
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
